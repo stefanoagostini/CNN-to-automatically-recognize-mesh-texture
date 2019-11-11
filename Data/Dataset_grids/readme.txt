@@ -1,0 +1,1 @@
+in this fold goes grids to create images to train the model

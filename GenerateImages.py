@@ -94,6 +94,7 @@ def saveImages(path_img, vect_img):
     cv2.imwrite(path_img + '.png', vect_img)
 
 
+
 path_files = 'Data/Dataset_grids/'
 path_label = 'Data/SHREK18_Labels/'
 

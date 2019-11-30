@@ -27,8 +27,7 @@ def createFolder(path, name):
     try:
         os.makedirs(path_folder)
     except FileExistsError:
-        # directory already exists
-        print(' directory {} already exists'.format(path_folder))
+        print(' directory {} already exist'.format(path_folder))
         pass
     except OSError:
         print('creation of the directory {} failed'.format(path_folder))

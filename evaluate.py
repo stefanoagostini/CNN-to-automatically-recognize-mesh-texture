@@ -12,7 +12,7 @@ import numpy as np
 
 if __name__ == '__main__':
     print("[INFO] Loading Images...")
-    imagePaths = paths.list_images("Data/images/train")
+    imagePaths = paths.list_images("Data/images/")
     sp = SimplePreprocessor(64, 64)
     pp = PaddingPreprocessor(32, 32, 32, 32, borderValue=0)
     sdl = SimpleDatasetLoader(preprocessors=[sp, pp])

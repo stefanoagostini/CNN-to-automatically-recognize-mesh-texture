@@ -1,1 +1,0 @@
-in this fold goes csv from single split evaluation.py script

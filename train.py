@@ -15,7 +15,7 @@ from sklearn import preprocessing
 from sklearn.model_selection import train_test_split, StratifiedKFold
 from imutils import paths
 from mylib.callbacks import TrainingMonitor
-from mylib.callbacks import EpochCheckpoint
+from keras.callbacks import ModelCheckpoint
 
 import os
 import argparse
@@ -28,7 +28,7 @@ def get_model():
     head_model = Flatten(name="flatten")(head_model)
     head_model = Dense(128, activation="relu")(head_model)
     head_model = Dropout(0.5)(head_model)
-    head_model = Dense(9, activation="softmax")(head_model)  # 12 labels if there were 10 models
+    head_model = Dense(9, activation="softmax")(head_model)  # 13 labels if there are 10 models
     model = Model(inputs=base_model.input, outputs=head_model)
     opt = Adam(lr=1e-4)  # tried from -3 to -6
     model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=["accuracy"])
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     k = int(args["k_fold"])
 
     print("[INFO] Loading Images...")
-    imagePaths = paths.list_images("Data/images/train")
+    imagePaths = paths.list_images("Data/images")
     sp = SimplePreprocessor(32, 32)
     pp = PaddingPreprocessor(48, 48, 48, 48, borderValue=0)
     sdl = SimpleDatasetLoader(preprocessors=[sp, pp])
@@ -70,8 +70,8 @@ if __name__ == '__main__':
         print(model.summary())
 
         # model checkpoint
-        modelPath = "Data/Callbacks"
-        checkpoint = EpochCheckpoint(modelPath, every=1)
+        model_path = "Data/Callbacks/single_test_model.h5"
+        checkpoint = ModelCheckpoint(model_path, monitor='val_loss', verbose=0, save_best_only=True, mode='min')
 
         # build the path to the training plot and training history
         plotPath = os.path.sep.join(["Data/Callbacks", "training_plot.png"])
@@ -82,7 +82,7 @@ if __name__ == '__main__':
 
         # fit
         history = model.fit(x_train, y_train, batch_size=batch_size, validation_data=(x_valid, y_valid), epochs=epochs, verbose=2, callbacks=callbacks_list)
-        model.save('Data/Model/model_single.h5')
+        model.save('Data/Model/model_single.hdf5')
 
     if split_policy == 'kfold':
         skf = StratifiedKFold(n_splits=k, random_state=50)
@@ -92,11 +92,16 @@ if __name__ == '__main__':
             print('[INFO] Fold=', i)
             train_X, test_X = X[train_index], X[test_index]
             train_Y, test_Y = Y[train_index], Y[test_index]
+            K.clear_session()
             model = get_model()
+            # model checkpoint
+            model_path = "Data/Model/fold_{}_model.hdf5".format(i)
+            checkpoint = ModelCheckpoint(model_path, monitor='val_loss', verbose=0, save_best_only=True, mode='min')
+            callbacks_list = [checkpoint]
             history = model.fit(train_X, train_Y, batch_size=batch_size, validation_split=0.2,
                                 epochs=epochs, verbose=2)
+            model.load_weights(model_path)
             print('Model evaluation: ', model.evaluate(test_X, test_Y))
-            model.save('Data/Model/model_fold_{}.h5'.format(i))
-            K.clear_session()
+
 
 

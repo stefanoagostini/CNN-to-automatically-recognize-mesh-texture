@@ -97,8 +97,7 @@ if __name__ == '__main__':
             # model checkpoint
             model_path = "Data/Model/fold_{}_model.hdf5".format(i)
             checkpoint = ModelCheckpoint(model_path, monitor='val_loss', verbose=0, save_best_only=True, mode='min')
-            early_stop = EarlyStopping(monitor="val_acc", mode='max', verbose=1, patience=5)
-            callbacks_list = [checkpoint, early_stop]
+            callbacks_list = [checkpoint]
             # Training
             history = model.fit(train_X, train_Y, batch_size=batch_size, validation_split=0.2,
                                 epochs=epochs, verbose=2)

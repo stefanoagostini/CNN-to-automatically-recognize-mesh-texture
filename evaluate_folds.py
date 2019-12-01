@@ -31,8 +31,9 @@ for i, (train_index, test_index) in enumerate(folds):
     print('[INFO] Fold=', i)
     train_X, test_X = X[train_index], X[test_index]
     train_Y, test_Y = Y[train_index], Y[test_index]
-    model_path = "Data/Model/stratified k fold/model_fold_{}.h5".format(i)
-    # model_path = "Data/Model/fold_{}_model.hdf5".format(i)
+    # just for tests
+    # model_path = "Data/Model/stratified k fold/model_fold_{}.h5".format(i)
+    model_path = "Data/Model/fold_{}_model.hdf5".format(i)
     model = load_model(model_path)
     predictions = model.predict(test_X, batch_size=32)
     predicted_classes = np.argmax(predictions, axis=1)

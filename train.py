@@ -28,7 +28,7 @@ def get_model():
     head_model = Flatten(name="flatten")(head_model)
     head_model = Dense(128, activation="relu")(head_model)
     head_model = Dropout(0.5)(head_model)
-    head_model = Dense(13, activation="softmax")(head_model)  # 13 labels if there are 10 models
+    head_model = Dense(13, activation="softmax")(head_model)  # 12 labels if there are 10 models and images have size 32x32
     model = Model(inputs=base_model.input, outputs=head_model)
     opt = Adam(lr=1e-4)  # tried from -3 to -6
     model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=["accuracy"])

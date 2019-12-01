@@ -15,7 +15,7 @@ from sklearn import preprocessing
 from sklearn.model_selection import train_test_split, StratifiedKFold
 from imutils import paths
 from mylib.callbacks import TrainingMonitor
-from keras.callbacks import ModelCheckpoint
+from keras.callbacks import ModelCheckpoint, EarlyStopping
 
 import os
 import argparse
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     ap.add_argument("-v", "--validation-split", default='0.2', help="validation split")
     ap.add_argument("-k", "--k-fold", default='10', help="number of folds for k-fold cross validation")
     ap.add_argument("-b", "--batch-size", default='32', help="batch size")
-    ap.add_argument("-e", "--epochs", default='20', help="number of training epochs")
+    ap.add_argument("-e", "--epochs", default='30', help="number of training epochs")
     args = vars(ap.parse_args())
     split_policy = args['split_policy']
     batch_size = int(args['batch_size'])
@@ -97,7 +97,9 @@ if __name__ == '__main__':
             # model checkpoint
             model_path = "Data/Model/fold_{}_model.hdf5".format(i)
             checkpoint = ModelCheckpoint(model_path, monitor='val_loss', verbose=0, save_best_only=True, mode='min')
-            callbacks_list = [checkpoint]
+            early_stop = EarlyStopping(monitor="val_acc", mode='max', verbose=1, patience=5)
+            callbacks_list = [checkpoint, early_stop]
+            # Training
             history = model.fit(train_X, train_Y, batch_size=batch_size, validation_split=0.2,
                                 epochs=epochs, verbose=2)
             model.load_weights(model_path)

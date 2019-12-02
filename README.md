@@ -31,7 +31,7 @@ git clone https://github.com/stefanoagostini/CNN-to-automatically-recognize-mesh
         python train.py -s <split-policy> -v <validation-split> -k <k-fold> -b <batch-size> -e <epochs>
 
         ```
-3. Run the script _evaluate_folds.py_ (if you have not changed the parameter split-policy into 'train.py')
+3. Run the script _evaluate_folds.py_ (if you have not changed the parameter split-policy into _train.py_)
     
     - If you have set <split-policy> to _single_: run the script _evaluate_single.py_
     

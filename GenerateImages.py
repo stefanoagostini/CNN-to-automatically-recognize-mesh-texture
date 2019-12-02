@@ -41,9 +41,10 @@ def min_max_pixel(train):
     """
       goal:determinate minimum and maximum of pixels
 
-      :param train: vector containing path with nwe name of images
+      :param train: vector containing path for images
       :return: values minimum and maximum of total pixels
       """
+    print('[INFO] search minimum and maximum pixel...')
     for i, elem in enumerate(train):
         mat = sio.loadmat(elem[0])
         if i == 0:
@@ -74,7 +75,7 @@ def arrayToImages(path_files, path_label, path_f):
     :param vect: vector
     :param path_f: path into save image
     """
-    print('[INFO] generate and save images...')
+    print('[INFO] load files...')
     train = []
     for f in glob.glob(path_files + '*'):
         model = os.path.basename(f)
@@ -91,7 +92,7 @@ def arrayToImages(path_files, path_label, path_f):
         train = train + tmp_train
 
     minimum, maximum = min_max_pixel(train)
-    print(minimum, maximum)
+    print('[INFO] rescale and save images...')
     old_range = maximum - minimum
     new_range = 255
     for elem in train:

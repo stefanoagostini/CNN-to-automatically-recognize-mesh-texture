@@ -116,12 +116,12 @@ path_label = 'Data/SHREK18_Labels/'
 
 if __name__ == "__main__":
     path = 'Data/images'
-    path_folder_train = createFolder(path, '/train')
+    #path_folder_train = createFolder(path, '/train')
     for i in np.arange(1, 13):
-        createFolder(path_folder_train, '/' + str(i))
-    path_folder_test = createFolder(path, '/test')
-    createFolder(path_folder_test, '/0')
+        createFolder(path, '/' + str(i))
+    #path_folder_test = createFolder(path, '/test')
+    #createFolder(path_folder_test, '/0')
 
     train, test = split_train_test(path_files, path_label)
     arrayImages(train, path_folder_train)
-    arrayImages(test, path_folder_test)
+    #arrayImages(test, path_folder_test)

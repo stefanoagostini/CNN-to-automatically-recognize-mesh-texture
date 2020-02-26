@@ -28,7 +28,7 @@ def get_model():
     head_model = Flatten(name="flatten")(head_model)
     head_model = Dense(128, activation="relu")(head_model)
     head_model = Dropout(0.5)(head_model)
-    head_model = Dense(12, activation="softmax")(head_model)  # 12 labels if there are 10 models and images have size 32x32
+    head_model = Dense(9, activation="softmax")(head_model)  # 12 labels if there are 10 models and images have size 32x32 (if no texture in the dataset, the labels are 13)
     model = Model(inputs=base_model.input, outputs=head_model)
     opt = Adam(lr=1e-4)  # tried from -3 to -6
     model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=["accuracy"])
@@ -100,9 +100,6 @@ if __name__ == '__main__':
             callbacks_list = [checkpoint]
             # Training
             history = model.fit(train_X, train_Y, batch_size=batch_size, validation_split=0.2,
-                                epochs=epochs, verbose=2)
+                                epochs=epochs, verbose=2, callbacks=callbacks_list)
             model.load_weights(model_path)
             print('Model evaluation: ', model.evaluate(test_X, test_Y))
-
-
-

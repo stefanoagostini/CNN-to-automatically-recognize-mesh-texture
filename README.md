@@ -12,7 +12,7 @@ git clone https://github.com/stefanoagostini/CNN-to-automatically-recognize-mesh
     * scipy    
     * numpy 
     * opencv-python
-    * glob
+    * glob2
     * keras
     * scikit-learn
     * imutils

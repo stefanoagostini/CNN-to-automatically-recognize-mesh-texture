@@ -11,7 +11,7 @@ git clone https://github.com/stefanoagostini/CNN-to-automatically-recognize-mesh
 2. Prerequisites for run this code:
     * scipy    
     * numpy 
-    * cv2
+    * opencv-python
     * glob
     * keras
     * scikit-learn

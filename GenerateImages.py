@@ -10,7 +10,6 @@ import re
 def sortFour(val):
     """
     Goal: orders based on the fourth value
-
     :param val: vector to order
     :return: return the fourth element of the elements passed as the paramater
     """
@@ -20,10 +19,8 @@ def sortFour(val):
 def split_train_test(path_files, path_label):
     """
     Goal: split data into train and test
-
     :param path_files: data path
     :param path_label: label path
-
     """
     test = []
     train = []
@@ -52,7 +49,6 @@ def split_train_test(path_files, path_label):
 def createFolder(path, name):
     """
     goal:create new folder
-
     :param path: path into create new folder
     :param name: name of new folder
     :return: new folder path
@@ -73,7 +69,6 @@ def createFolder(path, name):
 def arrayImages(vect, path_f):
     """
     Goal: create an array containing 3 channels characterized by descriptor: localdepth, azimuth,elevation
-
     :param vect: vector
     :param path_f: path into save image
     """
@@ -103,10 +98,8 @@ def arrayImages(vect, path_f):
 def saveImages(path, vect_img):
     """
     Goal: create image end save this
-
     :param path: path also containing the name of image, into save the image
     :param vect_img: array from which to create the image
-
     """
     cv2.imwrite(path + '.png', vect_img)
 
@@ -116,12 +109,9 @@ path_label = 'Data/SHREK18_Labels/'
 
 if __name__ == "__main__":
     path = 'Data/images'
-    #path_folder_train = createFolder(path, '/train')
     for i in np.arange(1, 13):
         createFolder(path, '/' + str(i))
-    #path_folder_test = createFolder(path, '/test')
-    #createFolder(path_folder_test, '/0')
 
     train, test = split_train_test(path_files, path_label)
-    arrayImages(train, path_folder_train)
+    arrayImages(train, path)
     #arrayImages(test, path_folder_test)

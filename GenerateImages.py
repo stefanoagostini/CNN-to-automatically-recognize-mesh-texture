@@ -6,7 +6,6 @@ import cv2
 import re
 
 
-
 def sortFour(val):
     """
     Goal: orders based on the fourth value
@@ -26,23 +25,26 @@ def split_train_test(path_files, path_label):
     train = []
     for f in glob.glob(path_files + '*'):
         model = os.path.basename(f)
-        labels = sio.loadmat(path_label + '/' + model)
-        tmp_test = []
-        tmp_train = []
-        for elem in glob.glob(f + '/*/*.mat'):
-            load_elem = sio.loadmat(elem)
-            val = load_elem['grid_data'][0][0][0]
-            name = int(''.join(filter(str.isdigit, os.path.basename(elem))))
-            number = re.findall(r'[0-9]+', str(elem))
-            ori = int(number[-1])
-            if (labels['label'][val] == 0):
-                tmp_test.append((elem, val, model, name, ori, labels['label'][val]))
-            else:
-                tmp_train.append((elem, val, model, name, ori, labels['label'][val]))
-        tmp_train.sort(key=sortFour)
-        tmp_test.sort(key=sortFour)
-        train = train + tmp_train
-        test = test + tmp_test
+        if (model != "readme.txt"):
+            labels = sio.loadmat(path_label + '/' + model)
+            tmp_test = []
+            tmp_train = []
+            for elem in glob.glob(f + '/*/*.mat'):
+                load_elem = sio.loadmat(elem)
+                val = load_elem['grid_data'][0][0][0]
+                name = int(''.join(filter(str.isdigit, os.path.basename(elem))))
+                number = re.findall(r'[0-9]+', str(elem))
+                ori = int(number[-1])
+                if (labels['label'][val] == 0):
+                    tmp_test.append((elem, val, model, name, ori, labels['label'][val]))
+                else:
+                    tmp_train.append((elem, val, model, name, ori, labels['label'][val]))
+            tmp_train.sort(key=sortFour)
+            tmp_test.sort(key=sortFour)
+            train = train + tmp_train
+            test = test + tmp_test
+        else:
+            pass
     return train, test
 
 
@@ -81,9 +83,9 @@ def arrayImages(vect, path_f):
         ori = elem[4]
         label = elem[5][0][0][0]
 
-        localdepth = (mat['grid_data'][0][0][1])*100
-        azimuth = (mat['grid_data'][0][0][2])*100
-        elevation = (mat['grid_data'][0][0][3])*100
+        localdepth = (mat['grid_data'][0][0][1]) * 100
+        azimuth = (mat['grid_data'][0][0][2]) * 100
+        elevation = (mat['grid_data'][0][0][3]) * 100
 
         vect_img = np.array([localdepth, azimuth, elevation])
         vect_img = vect_img.transpose(1, 2, 0)
@@ -114,4 +116,3 @@ if __name__ == "__main__":
 
     train, test = split_train_test(path_files, path_label)
     arrayImages(train, path)
-    #arrayImages(test, path_folder_test)

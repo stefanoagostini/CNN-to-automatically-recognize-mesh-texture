@@ -1,30 +1,4 @@
-Using TensorFlow backend.
-[INFO] Loading Images...
-[INFO] Training...
-WARNING:tensorflow:From C:\Users\Stefano\Anaconda3\envs\rosebrock\lib\site-packages\keras\backend\tensorflow_backend.py:74: The name tf.get_default_graph is deprecated. Please use tf.compat.v1.get_default_graph instead.
-WARNING:tensorflow:From C:\Users\Stefano\Anaconda3\envs\rosebrock\lib\site-packages\keras\backend\tensorflow_backend.py:517: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
-C:\Users\Stefano\Anaconda3\envs\rosebrock\lib\site-packages\keras_applications\mobilenet_v2.py:294: UserWarning: `input_shape` is undefined or non-square, or `rows` is not in [96, 128, 160, 192, 224]. Weights for input shape (224, 224) will be loaded as the default.
-  warnings.warn('`input_shape` is undefined or non-square, '
-WARNING:tensorflow:From C:\Users\Stefano\Anaconda3\envs\rosebrock\lib\site-packages\keras\backend\tensorflow_backend.py:4138: The name tf.random_uniform is deprecated. Please use tf.random.uniform instead.
-WARNING:tensorflow:From C:\Users\Stefano\Anaconda3\envs\rosebrock\lib\site-packages\keras\backend\tensorflow_backend.py:174: The name tf.get_default_session is deprecated. Please use tf.compat.v1.get_default_session instead.
-WARNING:tensorflow:From C:\Users\Stefano\Anaconda3\envs\rosebrock\lib\site-packages\keras\backend\tensorflow_backend.py:181: The name tf.ConfigProto is deprecated. Please use tf.compat.v1.ConfigProto instead.
-2019-11-07 18:11:26.728291: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2
-2019-11-07 18:11:26.731323: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library nvcuda.dll
-2019-11-07 18:11:26.824979: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1640] Found device 0 with properties: 
-name: GeForce GTX 970 major: 5 minor: 2 memoryClockRate(GHz): 1.253
-pciBusID: 0000:01:00.0
-2019-11-07 18:11:26.825365: I tensorflow/stream_executor/platform/default/dlopen_checker_stub.cc:25] GPU libraries are statically linked, skip dlopen check.
-2019-11-07 18:11:26.828008: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1763] Adding visible gpu devices: 0
-2019-11-07 18:11:27.530014: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1181] Device interconnect StreamExecutor with strength 1 edge matrix:
-2019-11-07 18:11:27.530257: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1187]      0 
-2019-11-07 18:11:27.530398: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1200] 0:   N 
-2019-11-07 18:11:27.531132: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1326] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 3004 MB memory) -> physical GPU (device: 0, name: GeForce GTX 970, pci bus id: 0000:01:00.0, compute capability: 5.2)
-WARNING:tensorflow:From C:\Users\Stefano\Anaconda3\envs\rosebrock\lib\site-packages\keras\backend\tensorflow_backend.py:1834: The name tf.nn.fused_batch_norm is deprecated. Please use tf.compat.v1.nn.fused_batch_norm instead.
-WARNING:tensorflow:From C:\Users\Stefano\Anaconda3\envs\rosebrock\lib\site-packages\keras\backend\tensorflow_backend.py:3980: The name tf.nn.avg_pool is deprecated. Please use tf.nn.avg_pool2d instead.
-WARNING:tensorflow:From C:\Users\Stefano\Anaconda3\envs\rosebrock\lib\site-packages\keras\backend\tensorflow_backend.py:3445: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
-Instructions for updating:
-Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
-WARNING:tensorflow:From C:\Users\Stefano\Anaconda3\envs\rosebrock\lib\site-packages\keras\optimizers.py:790: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
 __________________________________________________________________________________________________
 Layer (type)                    Output Shape         Param #     Connected to                     
 ==================================================================================================
@@ -362,10 +336,7 @@ Total params: 2,423,113
 Trainable params: 2,389,001
 Non-trainable params: 34,112
 __________________________________________________________________________________________________
-None
-WARNING:tensorflow:From C:\Users\Stefano\Anaconda3\envs\rosebrock\lib\site-packages\tensorflow\python\ops\math_grad.py:1250: add_dispatch_support.<locals>.wrapper (from tensorflow.python.ops.array_ops) is deprecated and will be removed in a future version.
-Instructions for updating:
-Use tf.where in 2.0, which has the same broadcast rule as np.where
+
 Train on 41280 samples, validate on 10320 samples
 Epoch 1/20
  - 214s - loss: 0.2733 - acc: 0.9184 - val_loss: 0.1799 - val_acc: 0.9517
